@@ -42,6 +42,29 @@ google-asr-africa probe rg --audio my_kiraundi.wav
 # SUPPORTED / UNSUPPORTED / REVIEW(<actual-language>)
 ```
 
+## REST API + test UI
+
+```bash
+google-asr-africa serve          # http://localhost:8000
+```
+
+- `GET /` — browser UI (pick language, upload a clip, see the transcript)
+- `GET /health` — liveness check
+- `GET /languages` — the verified catalog as JSON
+- `POST /transcribe?language=<code>` — send raw audio bytes, get JSON back
+
+```bash
+curl -X POST --data-binary @clip.flac -H 'Content-Type: audio/flac' \
+     'localhost:8000/transcribe?language=amharic'
+```
+
+Run it in Docker (no external deps beyond Python):
+
+```bash
+docker build -t google-asr-africa .
+docker run -p 8000:8000 google-asr-africa
+```
+
 ## Verified languages
 
 Amharic, Chichewa, Hausa, Igbo, Kinyarwanda, Kirundi, Ndebele, Oromo,

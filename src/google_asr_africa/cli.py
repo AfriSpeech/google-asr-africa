@@ -47,6 +47,11 @@ def _probe(args):
     probe_code(args.code, audio=args.audio, out=args.out, verbose=True)
 
 
+def _serve(args):
+    from .server import serve
+    serve(args.host, args.port, log=not args.quiet)
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(
         prog='google-asr-africa',
@@ -78,6 +83,13 @@ def main(argv=None):
     p_probe.add_argument('--out', help='csv to append the result to '
                                        '(default asr_support.csv)')
     p_probe.set_defaults(func=_probe)
+
+    p_srv = sub.add_parser('serve',
+                           help='start the REST API + browser test UI')
+    p_srv.add_argument('--host', default='0.0.0.0')
+    p_srv.add_argument('--port', type=int, default=8000)
+    p_srv.add_argument('--quiet', action='store_true', help='no startup banner')
+    p_srv.set_defaults(func=_serve)
 
     args = ap.parse_args(argv)
     args.func(args)
