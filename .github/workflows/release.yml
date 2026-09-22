@@ -1,0 +1,81 @@
+# Publish to PyPI when a version tag is pushed.
+#
+# Uses PyPI Trusted Publishing (OIDC), so there is no API token in this repository's secrets.
+# GitHub mints a short-lived identity token that PyPI verifies against a publisher configured at
+# https://pypi.org/manage/account/publishing/ with owner AfriSpeech, repo google-asr-africa,
+# workflow release.yml, environment pypi. Because the project does not exist on PyPI yet, that
+# has to be added as a *pending* publisher — a normal one can only be attached to a project that
+# already exists. The first successful run creates the project and converts it automatically.
+#
+# Tag and version must agree. A tag of v0.2.0 with `version = "0.1.0"` in pyproject.toml would
+# upload the wrong release and PyPI does not allow re-uploading a version, so the check below
+# fails the job before the build rather than after the upload.
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:          # lets you dry-run the build without tagging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Tag matches pyproject version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          ver=$(python -c "import tomllib,pathlib; \
+            print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          echo "tag=$tag pyproject=$ver"
+          [ "$tag" = "$ver" ] || { echo "::error::tag $tag != version $ver"; exit 1; }
+
+      - run: pip install build twine
+      - run: python -m build
+
+      # `twine check` catches a malformed README before upload. PyPI renders the long
+      # description itself and rejects the whole upload if it cannot.
+      - run: twine check dist/*
+
+      - name: Import the built wheel
+        run: |
+          pip install dist/*.whl
+          python -c "import google_asr_africa as g; print(g.__version__, len(g.supported_codes()))"
+
+      - name: CLI works from the installed wheel
+        run: |
+          google-asr-africa --help > /dev/null
+          google-asr-africa list-languages | head -3
+
+      # Run the suite against the *installed wheel*, from outside the source tree: the
+      # package data and entry points are the things most likely to be missing from a
+      # build, and a test run from the repo root would find the source on disk whether
+      # or not it was packaged.
+      - name: Test the installed wheel
+        run: |
+          pip install pytest
+          cd /tmp && python -m pytest "$GITHUB_WORKSPACE/tests" -q
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi          # must match the environment name set on PyPI's publisher form
+    permissions:
+      id-token: write          # required for OIDC; without it the upload cannot authenticate
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
