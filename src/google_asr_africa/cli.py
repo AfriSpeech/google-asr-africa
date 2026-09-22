@@ -9,13 +9,11 @@ import sys
 def _list_languages(args):
     from .languages import catalog
     rows = catalog()
-    print(f'{"code":<5} {"iso":<4} {"language":<28} {"verdict":<12} hours')
-    print('-' * 62)
+    print(f'{"code":<5} {"iso":<4} {"language":<28}')
+    print('-' * 37)
     for e in rows:
         print(f'{e["code"]:<5} {e.get("iso", ""):<4} '
-              f'{e.get("jw_name") or e.get("language", ""):<28} '
-              f'{e.get("verdict", "SUPPORTED"):<12} '
-              f'{e.get("hours", "")}')
+              f'{e.get("language", ""):<28}')
 
 
 def _transcribe(args):

@@ -9,8 +9,13 @@ from google_asr_africa import languages
 def test_catalog_present():
     rows = languages.catalog()
     assert len(rows) >= 20
-    fields = {'code', 'language', 'jw_name', 'wtlocale', 'iso', 'hours'}
+    fields = {'code', 'language', 'iso'}
     assert fields <= set(rows[0])
+
+
+def test_catalog_is_slim():
+    for e in languages.catalog():
+        assert set(e) <= {'code', 'language', 'iso'}
 
 
 def test_supported_subset():
@@ -29,8 +34,9 @@ def test_support_code_resolution():
 
 
 def test_is_supported_verdicts():
+    sup = set(languages.supported_codes())
     for e in languages.catalog():
-        assert e.get('verdict', 'SUPPORTED') in ('SUPPORTED',)
+        assert e['code'] in sup
 
 
 def test_languages_json_matches_pypackage_data():

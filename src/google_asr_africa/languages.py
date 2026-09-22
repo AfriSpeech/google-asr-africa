@@ -40,9 +40,9 @@ def supported_codes() -> List[str]:
 def support_code(name_or_code: str) -> Optional[str]:
     """Resolve a language name or code to a supported google ASR code.
 
-    Accepts a google code (``ny``), an ISO 639-3 code (``nya``), or any of the
-    common names / JW names. Returns None when nothing matches or the language
-    is not verified as supported.
+    Accepts a google code (``ny``), an ISO 639-3 code (``nya``), or a common
+    language name. Returns None when nothing matches or the language is not
+    verified as supported.
     """
     target = name_or_code.strip().lower()
     for e in supported():
@@ -51,8 +51,6 @@ def support_code(name_or_code: str) -> Optional[str]:
         if e.get('iso') == target:
             return e['code']
         if e.get('language', '').lower() == target:
-            return e['code']
-        if e.get('jw_name', '').lower() == target:
             return e['code']
     return None
 

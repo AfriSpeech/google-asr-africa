@@ -4,7 +4,7 @@ Built on the stdlib ``http.server`` so the container has nothing but Python.
 
 Endpoints
     GET  /health                 -> {"ok": true, "version": "..."}
-    GET  /languages              -> [{code, iso, language, verdict, hours}, ...]
+    GET  /languages              -> [{code, iso, language}, ...]
     GET  /                       -> a small browser UI for trying the API
     POST /transcribe?language=am -> audio bytes in the body -> transcription
 
@@ -80,7 +80,7 @@ fetch('/languages').then(r=>r.json()).then(rows=>{
   rows.forEach(r=>{
     const o=document.createElement('option');
     o.value=r.code;
-    o.textContent=`${r.jw_name || r.language} (${r.code})`;
+    o.textContent=`${r.language} (${r.code})`;
     langSel.appendChild(o);
   });
 });

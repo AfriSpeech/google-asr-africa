@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "google-asr-africa"
-version = "0.1.0"
+version = "0.1.1"
 description = "Transcribe African-language speech with Google's free web ASR endpoint. Ships a verified catalog of ~20 languages, a resumable batched transcriber, and a probe that checks whether any new language really works."
 readme = "README.md"
 requires-python = ">=3.9"
