@@ -1,0 +1,170 @@
+[
+ {
+  "code": "ny",
+  "language": "chichewa",
+  "jw_name": "Chichewa",
+  "wtlocale": "CN",
+  "iso": "nya",
+  "hours": "434.5"
+ },
+ {
+  "code": "xh",
+  "language": "xhosa",
+  "jw_name": "Xhosa",
+  "wtlocale": "XO",
+  "iso": "xho",
+  "hours": "433.3"
+ },
+ {
+  "code": "ig",
+  "language": "igbo",
+  "jw_name": "Igbo",
+  "wtlocale": "IB",
+  "iso": "ibo",
+  "hours": "432.7"
+ },
+ {
+  "code": "zu",
+  "language": "zulu",
+  "jw_name": "Zulu",
+  "wtlocale": "ZU",
+  "iso": "zul",
+  "hours": "430.5"
+ },
+ {
+  "code": "ts",
+  "language": "tsonga",
+  "jw_name": "Tsonga",
+  "wtlocale": "TS",
+  "iso": "tso",
+  "hours": "425.1"
+ },
+ {
+  "code": "sw",
+  "language": "swahili",
+  "jw_name": "Swahili",
+  "wtlocale": "SW",
+  "iso": "swa",
+  "hours": "422.9"
+ },
+ {
+  "code": "ak",
+  "language": "twi",
+  "jw_name": "Twi",
+  "wtlocale": "TW",
+  "iso": "twi",
+  "hours": "421.4"
+ },
+ {
+  "code": "rn",
+  "language": "rundi",
+  "jw_name": "Kirundi",
+  "wtlocale": "RU",
+  "iso": "run",
+  "hours": "415.3"
+ },
+ {
+  "code": "rw",
+  "language": "kinyarwanda",
+  "jw_name": "Kinyarwanda",
+  "wtlocale": "YW",
+  "iso": "kin",
+  "hours": "415.0"
+ },
+ {
+  "code": "nso",
+  "language": "sepedi",
+  "jw_name": "Sepedi",
+  "wtlocale": "SE",
+  "iso": "nso",
+  "hours": "411.6"
+ },
+ {
+  "code": "nr",
+  "language": "ndebele (south)",
+  "jw_name": "Ndebele (Zimbabwe)",
+  "wtlocale": "NBZ",
+  "iso": "nde",
+  "hours": "411.1"
+ },
+ {
+  "code": "yo",
+  "language": "yoruba",
+  "jw_name": "Yoruba",
+  "wtlocale": "YR",
+  "iso": "yor",
+  "hours": "411.0"
+ },
+ {
+  "code": "sn",
+  "language": "shona",
+  "jw_name": "Shona",
+  "wtlocale": "CA",
+  "iso": "sna",
+  "hours": "406.3"
+ },
+ {
+  "code": "st",
+  "language": "sesotho",
+  "jw_name": "Sesotho (South Africa)",
+  "wtlocale": "SSA",
+  "iso": "sot",
+  "hours": "405.3"
+ },
+ {
+  "code": "tn",
+  "language": "tswana",
+  "jw_name": "Setswana",
+  "wtlocale": "TN",
+  "iso": "tsn",
+  "hours": "398.0"
+ },
+ {
+  "code": "am",
+  "language": "amharic",
+  "jw_name": "Amharic",
+  "wtlocale": "AM",
+  "iso": "amh",
+  "hours": "397.5"
+ },
+ {
+  "code": "om",
+  "language": "oromo",
+  "jw_name": "Oromo",
+  "wtlocale": "OA",
+  "iso": "orm",
+  "hours": "385.8"
+ },
+ {
+  "code": "ha",
+  "language": "hausa",
+  "jw_name": "Hausa",
+  "wtlocale": "HA",
+  "iso": "hau",
+  "hours": "385.1"
+ },
+ {
+  "code": "ss",
+  "language": "swati",
+  "jw_name": "Swati",
+  "wtlocale": "SWI",
+  "iso": "ssw",
+  "hours": "359.4"
+ },
+ {
+  "code": "ve",
+  "language": "venda",
+  "jw_name": "Venda",
+  "wtlocale": "VE",
+  "iso": "ven",
+  "hours": "339.9"
+ },
+ {
+  "code": "ti",
+  "language": "tigrinya",
+  "jw_name": "Tigrinya",
+  "wtlocale": "TI",
+  "iso": "tir",
+  "hours": "225.1"
+ }
+]

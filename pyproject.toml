@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "google-asr-africa"
+version = "0.1.0"
+description = "Transcribe African-language speech with Google's free web ASR endpoint. Ships a verified catalog of ~20 languages, a resumable batched transcriber, and a probe that checks whether any new language really works."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "AfriSpeech" }]
+keywords = ["asr", "speech", "transcription", "african-languages", "google-asr", "tts"]
+dependencies = [
+    "SpeechRecognition>=3.10",
+    "soundfile>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+probe = ["fasttext>=0.9.2", "huggingface_hub>=0.23"]
+
+[project.scripts]
+google-asr-africa = "google_asr_africa.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/google_asr_africa"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
